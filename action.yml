@@ -51,6 +51,7 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  args: "--ulimit nofile=262144:262144"
 branding:
   icon: "box"
   color: "red"
