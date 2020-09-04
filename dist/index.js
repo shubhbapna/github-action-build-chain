@@ -4396,7 +4396,7 @@ module.exports.default = macosRelease;
 /***/ (function(module) {
 
 function treat(command) {
-  return `${command} -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -s /home/emingora/.m2/pull_request_settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.repo.local=/home/emingora/.m2/locally_execution_temp-repository-20200902_2`;
+  return `${command} -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B`;
 }
 
 module.exports = {
