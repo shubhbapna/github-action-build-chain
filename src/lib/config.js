@@ -16,7 +16,7 @@ async function createConfig(eventData, rootFolder, env = {}) {
       actor: env["GITHUB_ACTOR"], // Ginxo
       sourceBranch: env["GITHUB_HEAD_REF"], // Ginxo-patch-1
       targetBranch: env["GITHUB_BASE_REF"], // master
-      jobName: env["GITHUB_JOB"], // build-chain
+      jobId: env["GITHUB_JOB"], // build-chain
       sourceRepository: eventData.repository
         ? eventData.repository.name
         : eventData.pull_request.repo
@@ -25,7 +25,7 @@ async function createConfig(eventData, rootFolder, env = {}) {
       repository: env["GITHUB_REPOSITORY"], // Ginxo/lienzo-tests
       group: env["GITHUB_REPOSITORY"].split("/")[0], // Ginxo
       project: env["GITHUB_REPOSITORY"].split("/")[1], // lienzo-tests
-      workflow: `.github/workflows/${getWorkflowfileName()}`, // .github/workflows/main.yml
+      flowFile: getWorkflowfileName(), // main.yml
       workflowName: env["GITHUB_WORKFLOW"], // Build Chain
       ref: env["GITHUB_REF"] // refs/pull/1/merge'
     };
@@ -39,7 +39,6 @@ async function createConfig(eventData, rootFolder, env = {}) {
 async function createConfigLocally(octokit, eventUrl, env = {}) {
   const event = await getEvent(octokit, eventUrl);
   const m = eventUrl.match(GIT_URL_REGEXP);
-  console.log("eventUrl", eventUrl, m);
   env["GITHUB_SERVER_URL"] = m[1];
   env["GITHUB_ACTION"] = undefined;
   env["GITHUB_ACTOR"] = event.pull_request.head.user.login;
