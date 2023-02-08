@@ -1,0 +1,25 @@
+name: custom github action e2e
+
+on: pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./build-chain
+        with:
+          definition-file: ${{ inputs.STARTING_PROJECT }}
+          flow-type: ${{ inputs.FLOW_TYPE }}
+          starting-project: ${{ inputs.STARTING_PROJECT }}
+          skip-execution: ${{ inputs.SKIP_EXECUTION }}
+          skip-project-execution: ${{ inputs.SKIP_PROJECT_EXECUTION }}
+          skip-checkout: ${{ inputs.SKIP_CHECKOUT }}
+          skip-project-checkout: ${{ inputs.SKIP_PROJECT_CHECKOUT }}
+          skip-parallel-checkout: ${{ inputs.SKIP_PARALLEL_CHECKOUT }}
+          custom-command-treatment: ${{ inputs.CUSTOM_COMMAND_TREATMENT }}
+          additional-flags: ${{ inputs.ADDITIONAL_FLAGS }}
+          logger-level: ${{ inputs.LOGGER_LEVEL }}
+          annotations-prefix: ${{ inputs.ANNOTATIONS_PREFIX }}
+
+
+

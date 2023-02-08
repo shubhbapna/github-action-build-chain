@@ -1,0 +1,17 @@
+[
+  {
+    "name": "issue-372",
+    "definition-file": "",
+    "flow-type": "",
+    "starting-project": "",
+    "skip-execution": "",
+    "skip-project-execution": "",
+    "skip-checkout": "",
+    "skip-project-checkout": "",
+    "skip-parallel-checkout": "",
+    "custom-command-treatment": "",
+    "additional-flags": "",
+    "logger-level": "",
+    "annotations-prefix": ""
+  }
+]

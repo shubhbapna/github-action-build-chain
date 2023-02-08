@@ -2,7 +2,7 @@ import { GitActionTypes, MockGithub, Moctokit } from "@kie/mock-github";
 import path from "path";
 import { Act } from "@kie/act-js";
 import { existsSync, rmSync } from "fs";
-import { logActOutput } from "../helper/logger";
+import { logActOutput } from "../../helper/logger";
 
 
 let mockGithub: MockGithub;
