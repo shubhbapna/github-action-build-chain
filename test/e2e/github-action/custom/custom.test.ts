@@ -19,6 +19,9 @@ type TestCommand = {
   "additional-flags"?: string;
   "logger-level"?: string;
   "annotations-prefix"?: string;
+  "java-version"?: string;
+  "maven-version"?: string;
+  "cache-key-prefix"?: string;
   eventPayload?: EventJSON
   env?: Record<string, string>
   shouldFail?: boolean
@@ -76,17 +79,23 @@ describe("test custom e2e commands", () => {
         act.setEvent(testCase.eventPayload);
       }
       
-      act.setInput("definition-file", testCase["definition-file"]);
-      act.setInput("flow-type", testCase["flow-type"]);
+      for (const [key, value] of Object.entries(testCase)) {
+        if (value && 
+          !["name", "eventPayload", "env", "name"].includes(key) &&
+          typeof value === "string") {
+            act.setInput(key, value);
+        }
+      }
 
       const result = await act.runEvent("workflow_dispatch", {
         ...logActOutput(`${testCase.name}-action.log`),
-        workflowFile: mockGithub.repo.getPath("build-chain"),
+        cwd: mockGithub.repo.getPath("build-chain"),
+        workflowFile: mockGithub.repo.getPath("build-chain")
       });
 
-      expect(result.length).toBe(2);
-      expect(result[1].name).toBe("Main ./build-chain");
-      expect(result[1].status).toBe(testCase.shouldFail ? 1 : 0);
+      expect(result.length).toBe(3);
+      expect(result[2].name).toBe("Main ./build-chain");
+      expect(result[2].status).toBe(testCase.shouldFail ? 1 : 0);
     });
   }
 });

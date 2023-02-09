@@ -5,61 +5,68 @@ on:
     inputs:
       definition-file:
         required: true
-        type: string
       flow-type:
         required: true
-        type: string
       starting-project:
         required: false
-        type: string
       skip-execution:
         required: false
-        type: string
+        default: "false"
       skip-project-execution:
         required: false
-        type: string
       skip-checkout:
         required: false
-        type: string
+        default: "false"
       skip-project-checkout:
         required: false
-        type: string
       skip-parallel-checkout:
         required: false
-        type: string
+        default: "false"
       custom-command-treatment:
         required: false
-        type: string
       additional-flags:
         required: false
-        type: string
       logger-level:
         default: "debug"
         required: false
-        type: string
       annotations-prefix:
         required: false
-        type: string
+      java-version:
+        default: "11"
+        required: false
+      maven-version:
+        default: "3.8.7"
+        required: false
+      cache-key-prefix:
+        default: "Linux-11-maven3.8.7"
+        required: false
       
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
         with:
-          definition-file: ${{ inputs.STARTING_PROJECT }}
-          flow-type: ${{ inputs.FLOW_TYPE }}
-          starting-project: ${{ inputs.STARTING_PROJECT }}
-          skip-execution: ${{ inputs.SKIP_EXECUTION }}
-          skip-project-execution: ${{ inputs.SKIP_PROJECT_EXECUTION }}
-          skip-checkout: ${{ inputs.SKIP_CHECKOUT }}
-          skip-project-checkout: ${{ inputs.SKIP_PROJECT_CHECKOUT }}
-          skip-parallel-checkout: ${{ inputs.SKIP_PARALLEL_CHECKOUT }}
-          custom-command-treatment: ${{ inputs.CUSTOM_COMMAND_TREATMENT }}
-          additional-flags: ${{ inputs.ADDITIONAL_FLAGS }}
-          logger-level: ${{ inputs.LOGGER_LEVEL }}
-          annotations-prefix: ${{ inputs.ANNOTATIONS_PREFIX }}
+          path: build-chain
+      - uses: kiegroup/kogito-pipelines/.ci/actions/maven@main
+        with:
+          java-version: ${{ inputs.java-version }}
+          maven-version: ${{ inputs.maven-version }}
+          cache-key-prefix: ${{ inputs.maven-version }}
+      - uses: ./build-chain
+        with:
+          definition-file: ${{ inputs.definition-file }}
+          flow-type: ${{ inputs.flow-type }}
+          starting-project: ${{ inputs.starting-project }}
+          skip-execution: ${{ inputs.skip-execution }}
+          skip-project-execution: ${{ inputs.skip-project-execution }}
+          skip-checkout: ${{ inputs.skip-checkout }}
+          skip-project-checkout: ${{ inputs.skip-project-checkout }}
+          skip-parallel-checkout: ${{ inputs.skip-parallel-checkout }}
+          custom-command-treatment: ${{ inputs.custom-command-treatment }}
+          additional-flags: ${{ inputs.additional-flags }}
+          logger-level: ${{ inputs.logger-level }}
+          annotations-prefix: ${{ inputs.annotations-prefix }}
 
 
 
