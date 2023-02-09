@@ -17,6 +17,4 @@ jobs:
       - name: Add to path
         run: echo "$PWD/build/" >> $GITHUB_PATH
       - name: Execute build-chain
-        run: build-chain build full_downstream -f
-          'https://raw.githubusercontent.com/kiegroup/droolsjbpm-build-bootstrap/${BRANCH:main}/.ci/compilation-config.yaml'
-          -o bc -u https://github.com/kiegroup/drools/pull/4978 --skipExecution
+        run: build-chain help
