@@ -1,17 +1,31 @@
 [
   {
     "name": "issue-372",
-    "definition-file": "",
-    "flow-type": "",
-    "starting-project": "",
-    "skip-execution": "",
-    "skip-project-execution": "",
-    "skip-checkout": "",
-    "skip-project-checkout": "",
-    "skip-parallel-checkout": "",
-    "custom-command-treatment": "",
-    "additional-flags": "",
-    "logger-level": "",
-    "annotations-prefix": ""
+    "definition-file": "https://raw.githubusercontent.com/kiegroup/droolsjbpm-build-bootstrap/${BRANCH:main}/.ci/compilation-config.yaml",
+    "flow-type": "cross_pr",
+    "eventPayload": {
+      "pull_request": {
+        "head": {
+          "ref": "tarilabs-20230207-RHDM-1957",
+          "repo": {
+            "full_name": "tarilabs/drools",
+            "name": "drools",
+            "owner": {
+              "login": "tarilabs"
+            }
+          }
+        },
+        "base": {
+          "ref": "7.x",
+          "repo": {
+            "full_name": "kiegroup/drools",
+            "name": "drools",
+            "owner": {
+              "login": "kiegroup"
+            }
+          }
+        }
+      }
+    }
   }
 ]

@@ -1,12 +1,52 @@
 name: custom github action e2e
 
-on: pull_request
+on:
+  workflow_dispatch:
+    inputs:
+      definition-file:
+        required: true
+        type: string
+      flow-type:
+        required: true
+        type: string
+      starting-project:
+        required: false
+        type: string
+      skip-execution:
+        required: false
+        type: string
+      skip-project-execution:
+        required: false
+        type: string
+      skip-checkout:
+        required: false
+        type: string
+      skip-project-checkout:
+        required: false
+        type: string
+      skip-parallel-checkout:
+        required: false
+        type: string
+      custom-command-treatment:
+        required: false
+        type: string
+      additional-flags:
+        required: false
+        type: string
+      logger-level:
+        default: "debug"
+        required: false
+        type: string
+      annotations-prefix:
+        required: false
+        type: string
+      
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./build-chain
+      - uses: ./
         with:
           definition-file: ${{ inputs.STARTING_PROJECT }}
           flow-type: ${{ inputs.FLOW_TYPE }}

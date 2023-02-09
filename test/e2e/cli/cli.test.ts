@@ -46,7 +46,7 @@ describe("test custom cli e2e commands", () => {
       }
 
       const result = await act.runEvent("pull_request", {
-        ...logActOutput(`${testCase.name}.log`),
+        ...logActOutput(`${testCase.name}-cli.log`),
         workflowFile: tmpFolder,
         mockSteps: {
           build: [
